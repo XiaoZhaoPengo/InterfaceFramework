@@ -2,37 +2,32 @@
 case_common:
   allureEpic: 开发平台接口
   allureFeature: 收藏模块
-  allureStory: 删除收藏网站接口
+  allureStory: 删除收藏商品接口
 
 collect_delete_tool_01:
     host: ${{host()}}
-    url: /lg/collect/deletetool/json
+    url: /iOS/v2.0/user/collectProducts/delete
     method: POST
-    detail: 正常删除收藏网站
+    detail: 正常删除收藏商品
     headers:
-      Content-Type: multipart/form-data;
+      Content-Type: application/json;
       # 这里cookie的值，写的是存入缓存的名称
-      cookie: $cache{login_cookie}
+      token: $cache{login_token}
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      id: $cache{collect_delete_tool_01_id}
-      id2: 2
-    dependence_case: True
+      productIds: "1150930"
+      token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXRvbmd6ZXJvLmNvbSIsInVzZXJJZCI6IjI4OTY5NDkiLCJuaWNrTmFtZSI6IlpaWTk1MDc0NjIxIiwiYXZhdGFyVXJsIjoiaHR0cHM6Ly9zcmMuenV6dXlhLmNuL0ZxRURTTFBuaTNIZmJYQzdLWlZSVldfbUlfTVoiLCJtb2JpbGUiOiIxODI3MTQyMTIwMyIsImlhdCI6MTcyMTAxMTAzMSwiZXhwIjoxNzIxNjE1ODMxfQ.kaBCCTnDBOlT_aZsaymaIZSAqx0Bug2ESadRvOreKaU"
+    dependence_case: False
     # 依赖的数据
     dependence_case_data:
-      - case_id: collect_addtool_01
-        dependent_data:
-          - dependent_type: response
-            jsonpath: $.data.id
-            set_cache: collect_delete_tool_01_id
 
     assert:
       # 断言接口状态码
       errorCode:
-        jsonpath: $.errorCode
+        jsonpath: $.head.code
         type: ==
         value: 0
         AssertType:

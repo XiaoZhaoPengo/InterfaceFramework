@@ -1,79 +1,14 @@
 # 公共参数
 case_common:
   allureEpic: 开发平台接口
-  allureFeature: 商品下单模块
-  allureStory: 商品下单接口
+  allureFeature: 直播商品下单模块
+  allureStory: 直播商品下单接口
 
-buy_product_01:
+buy_product_live_01:
     host: ${{host()}}
-    url: /iOS/v2.0/getQuestionOutline?productId=1150930
-    method: GET
-    detail: 获取产品状态
-    headers:
-      content-type: application/json
-      # 这里token的值，写的是存入缓存的名称
-      token: $cache{login_token}
-    # 请求的数据，是 params 还是 json、或者file、data
-    requestType: json
-    # 是否执行，空或者 true 都会执行
-    is_run:
-    data:
-
-    # 是否有依赖业务，为空或者false则表示没有
-    dependence_case: False
-        # 依赖的数据
-    dependence_case_data:
-    assert:
-      # 断言接口状态码
-      code:
-        jsonpath: $.head.code
-        type: ==
-        value: 0
-        AssertType:
-      status_code: 200
-      message:
-        jsonpath: $.head.message
-        type: ==
-        value: 'success'
-        AssertType:
-    sql:
-buy_product_02:
-    host: ${{host()}}
-    url: /iOS/v2.0/getQuestionOutline?productId=1150930
-    method: GET
-    detail: 获取产品状态
-    headers:
-      content-type: application/json
-      # 这里token的值，写的是存入缓存的名称
-      token: $cache{login_token}
-    # 请求的数据，是 params 还是 json、或者file、data
-    requestType: json
-    # 是否执行，空或者 true 都会执行
-    is_run:
-    data:
-
-    # 是否有依赖业务，为空或者false则表示没有
-    dependence_case: False
-        # 依赖的数据
-    dependence_case_data:
-    assert:
-      # 断言接口状态码
-      code:
-        jsonpath: $.head.code
-        type: ==
-        value: 0
-        AssertType:
-      message:
-        jsonpath: $.head.message
-        type: ==
-        value: 'success'
-        AssertType:
-    sql:
-buy_product_03:
-    host: ${{host()}}
-    url: /v2.0/alimini/preAuthOrder/checkLogin
+    url: /v2.1/products/detail/1150928?exclusivePrice=
     method: get
-    detail: 检查当前登录状态
+    detail: 获取直播测试商品订单 (商品目前是隐藏状态 先跳过)
     headers:
       content-type: application/json
       # 这里token的值，写的是存入缓存的名称
@@ -81,8 +16,9 @@ buy_product_03:
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: json
     # 是否执行，空或者 true 都会执行
-    is_run:
+    is_run: False
     data:
+      exclusivePrice:
     # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
         # 依赖的数据
@@ -94,18 +30,17 @@ buy_product_03:
         type: ==
         value: 0
         AssertType:
-      status_code: 200
       message:
         jsonpath: $.head.message
         type: ==
         value: 'success'
         AssertType:
     sql:
-buy_product_04:
+buy_product_live_02:
     host: ${{host()}}
-    url: /v2.0/alimini/preAuthOrder/createPreOrder
+    url: /v2.3/alimini/preAuthOrder/createPreOrder
     method: POST
-    detail: 准备创建普通测试商品订单
+    detail: 准备创建直播测试商品订单
     headers:
       content-type: application/json
       # 这里token的值，写的是存入缓存的名称
@@ -115,13 +50,12 @@ buy_product_04:
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-        activeCoupon: true
-        count: "1"
-        firstRegionId: 0
-        isInsurance: "0"
-        productId: "1150930"
-        selfId: 0
-        skuId: "TC23-RL05-YS02-ZQ05"
+      count: 1
+      firstRegionId: 0
+      isInsurance: "0"
+      productId: "1150928"
+      selfId: 0
+      skuId: "TC23-RL12-YS01-ZQ05"
     # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
         # 依赖的数据
@@ -139,38 +73,122 @@ buy_product_04:
         value: 'success'
         AssertType:
     sql:
-buy_product_05:
-  host: ${{host()}}
-  url: /v2.0/alimini/preAuthOrder/userCertifyUrl
-  method: POST
-  detail: 用户认证
-  headers:
-    content-type: application/json
-    # 这里token的值，写的是存入缓存的名称
-    token: $cache{login_token}
-  # 请求的数据，是 params 还是 json、或者file、data
-  requestType: json
-  # 是否执行，空或者 true 都会执行
-  is_run:
-  data:
-    certName: "肖朝鹏"
-    certNo: "420115200004219814"
-    orderNumber: "0715104528969591"
-  # 是否有依赖业务，为空或者false则表示没有
-  dependence_case: False
-  # 依赖的数据
-  dependence_case_data:
-  assert:
-    # 断言接口状态码
-    code:
-      jsonpath: $.head.code
-      type: ==
-      value: 0
-      AssertType:
-    status_code: 200
-    message:
-      jsonpath: $.head.message
-      type: ==
-      value: 'success'
-      AssertType:
-  sql:
+buy_product_live_03:
+    host: ${{host()}}
+    url: /v2.3/alimini/preAuthOrder/createOrder
+    method: POST
+    detail: 创建完成直播测试商品订单
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+       "orderNo": $cache{buy_product_live_03_v_orderNo}
+       "remark": ""
+       "email": "1340128837@qq.com"
+       "model": "iPhone16,2"
+       "sourceId": "MjA4ODkxMjI0MjY4MTc3M3wyMDIxMDAxMTk5NjQ1MTUwfDE3MjEyOTI3MjE4Mzl8ZmFsc2V8VE9LRU5fSVNfTlVMTA=="
+       "selfId": 0
+       "firstRegionId": 0
+       "deliveryId": 758923
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: True
+        # 依赖的数据
+    dependence_case_data:
+      - case_id: buy_product_live_02
+        dependent_data:
+          - dependent_type: response
+            jsonpath: $.details.orderNo
+            set_cache: buy_product_live_03_v_orderNo
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_live_04:
+    host: ${{host()}}
+    url: /liveOrder/getPaySign
+    method: POST
+    detail: 支付直播订单
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      orderNumber: $cache{buy_product_live_03_v_orderNo}
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: True
+        # 依赖的数据
+    dependence_case_data:
+      - case_id: buy_product_live_02
+        dependent_data:
+          - dependent_type: response
+            jsonpath: $.details.orderNo
+            set_cache: buy_product_live_04_v_orderNo
+      - case_id: buy_product_live_03
+        dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.user_id
+          set_cache: buy_product_live_04_v_user_id
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_live_05:
+    host: ${{host()}}
+    url: /minialiapp/riskCommit
+    method: POST
+    detail: 风险承诺
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      orderNumber: "0718025828969593"
+      rank: "serviceNoAuth"
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+        # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:

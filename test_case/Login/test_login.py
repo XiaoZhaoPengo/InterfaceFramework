@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2024-07-17 16:11:28
+# @Time   : 2024-07-18 17:51:43
 
 
 import allure
@@ -12,7 +12,7 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['login_01', 'login_02', 'login_03', 'login_04', 'login_05', 'login_06', 'login_07', 'login_08']
+case_id = ['login_01', 'login_02']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 

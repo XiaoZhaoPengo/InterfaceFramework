@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2024-07-17 16:11:27
+# @Time   : 2024-07-18 17:51:43
 
 
 import allure
@@ -21,7 +21,7 @@ re_data = regular(str(TestData))
 @allure.feature("收藏模块")
 class TestCollectDeleteTool:
 
-    @allure.story("删除收藏网站接口")
+    @allure.story("删除收藏商品接口")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
     def test_collect_delete_tool(self, in_data, case_skip):
         """

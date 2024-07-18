@@ -2,19 +2,19 @@
 case_common:
   allureEpic: 开发平台接口
   allureFeature: 收藏模块
-  allureStory: 编辑收藏网址接口
+  allureStory: 编辑收藏商品接口（暂无先跳过）
 
 collect_update_tool_01:
     host: ${{host()}}
     url: /lg/collect/addtool/json
     method: POST
-    detail: 编辑收藏网址
+    detail: 编辑收藏商品
     headers:
-      Content-Type: multipart/form-data;
+      Content-Type: application/json;
       # 这里cookie的值，写的是存入缓存的名称
-      cookie: $cache{login_cookie}
+      token: $cache{login_token}
     # 请求的数据，是 params 还是 json、或者file、data
-    requestType: data
+    requestType: json
     # 是否执行，空或者 true 都会执行
     is_run: False
     data:

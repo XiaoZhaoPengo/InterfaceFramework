@@ -32,10 +32,10 @@ ding_talk:
 # 数据库相关配置
 mysql_db:
   # 数据库开关
-  switch: False
-  host:
-  user: root
-  password: '123456'
+  switch: True
+  host: ob-4ns1d6jqa5mo.db.cloudob.cn
+  user: admin
+  password: 'Zzyadmin2023'
   port: 3306
 
 # 镜像源

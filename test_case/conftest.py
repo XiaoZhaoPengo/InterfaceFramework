@@ -33,13 +33,13 @@ def work_login_init():
     
     url = "https://dev.api.zuzuya.cn/minialiapp/user/phoneAuth"
     data = {
-        "auth_code": '33d7aa04e8c0472c9072ff8e8fabZX77',
-        "clientType": 'alipayMiniapp',
-        "phoneData": '{\"response\":\"lHMEErMZCAjMYopf4Fl0RdSUmwvUQfIkf1lDslVJ9U9Bw9+GhlNPtShcFC6SkiWBpJE1rDnDeVjUAuaya5rpJg==\",\"sign\":\"RFISYSozx5AsTSpwcWdt/JtBhO2+3gtI+MNljC9+fyBDCOxMA5me13M372YY0uA6uUYufrBGUicFepxzb49ArUN511HbOSRw6NqYV23wxzDTJtT2/9uvgJn4HRu4R1YjVaU7jqVQ+m081g8XSW1tS4Ey8Ns0lY8Xwy35Rso7/lE7UuLULrbSsFYQBrojPGTwo09R7UiQTfVMxhEMZTrI5XtxNgir6dkVBZ+M+tnenqRf+OzpTbigfYTCs0x70YcKelIz7EYtBLK/fwGVVPd3Ub/d5UCJYG5raAutTr9E0Uw2VLRC41ChIGoSW7SZDxgcz2S3urPbFLqgWmPhAwDE3w==\"}',
+        "auth_code": '51d23495b9674fb4b8d2674d940cZC77',
+        "phoneData": "{\"response\":\"lHMEErMZCAjMYopf4Fl0RdSUmwvUQfIkf1lDslVJ9U9Bw9+GhlNPtShcFC6SkiWBpJE1rDnDeVjUAuaya5rpJg==\",\"sign\":\"RFISYSozx5AsTSpwcWdt/JtBhO2+3gtI+MNljC9+fyBDCOxMA5me13M372YY0uA6uUYufrBGUicFepxzb49ArUN511HbOSRw6NqYV23wxzDTJtT2/9uvgJn4HRu4R1YjVaU7jqVQ+m081g8XSW1tS4Ey8Ns0lY8Xwy35Rso7/lE7UuLULrbSsFYQBrojPGTwo09R7UiQTfVMxhEMZTrI5XtxNgir6dkVBZ+M+tnenqRf+OzpTbigfYTCs0x70YcKelIz7EYtBLK/fwGVVPd3Ub/d5UCJYG5raAutTr9E0Uw2VLRC41ChIGoSW7SZDxgcz2S3urPbFLqgWmPhAwDE3w==\"}",
+        "clientType": 'alipayMiniapp'
     }
     
-    headers = {'Content-Type': 'application/json;charset=UTF-8', "from": '', 'appId': '2021001199645150',
-               'fromAuthCode': 'fe5b53d6889e4fd38aeb0e0d340cOX77'}
+    headers = {'Content-Type': 'application/json', "from": '', 'appId': '2021001199645150',
+               'fromAuthCode': 'e6ac010acda44bf2a35ed97d4d65NX77'}
     # 请求登录接口
     data = json.dumps(data)
     res = requests.post(url=url, data=data, verify=True, headers=headers)
@@ -137,3 +137,6 @@ def pytest_terminal_summary(terminalreporter):
         INFO.logger.info("用例成功率: %.2f" % _RATE + " %")
     except ZeroDivisionError:
         INFO.logger.info("用例成功率: 0.00 %")
+
+if __name__ == '__main__':
+    work_login_init()

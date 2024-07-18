@@ -1,69 +1,57 @@
 # 公共参数
 case_common:
   allureEpic: 开发平台接口
-  allureFeature: 收藏模块
-  allureStory: 收藏网址接口
+  allureFeature: 收藏商品
+  allureStory: 收藏商品接口
 
 collect_addtool_01:
     host: ${{host()}}
-    url: /lg/collect/addtool/json
+    url: /iOS/v2.0/user/collectProduct/save
     method: POST
-    detail: 新增收藏网址接口
+    detail: 新增收藏商品接口
     headers:
+      Content-Type: application/json;
       # 这里cookie的值，写的是存入缓存的名称
-      cookie: $cache{login_cookie}
+      token: $cache{login_token}
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      name: 自动化
-      link: https://gitee.com/yu_xiao_qi/pytest-auto-api2
-
+      productId: "1150930"
+      token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXRvbmd6ZXJvLmNvbSIsInVzZXJJZCI6IjI4OTY5NDkiLCJuaWNrTmFtZSI6IlpaWTk1MDc0NjIxIiwiYXZhdGFyVXJsIjoiaHR0cHM6Ly9zcmMuenV6dXlhLmNuL0ZxRURTTFBuaTNIZmJYQzdLWlZSVldfbUlfTVoiLCJtb2JpbGUiOiIxODI3MTQyMTIwMyIsImlhdCI6MTcyMTAxMTAzMSwiZXhwIjoxNzIxNjE1ODMxfQ.kaBCCTnDBOlT_aZsaymaIZSAqx0Bug2ESadRvOreKaU"
     dependence_case: False
     # 依赖的数据
     dependence_case_data:
     assert:
       # 断言接口状态码
-      errorCode:
-        jsonpath: $.errorCode
+      code:
+        jsonpath: $.head.code
         type: ==
         value: 0
         AssertType:
-        message: "errorCode 断言为 0"
-
-    current_request_set_cache:
-      - type: response
-        jsonpath: $.data.id
-        # 自定义的缓存名称
-        name: yushaoqi_sql
-    sql:
-    teardown:
-      - case_id: collect_delete_tool_01
-        send_request:
-          - dependent_type: response
-            jsonpath: $.data.id
-            replace_key: $.data.id
-
-    teardown_sql:
-      - UPDATE `api_test`.`ysq_test` SET `name` = '$json($.data.id)$' WHERE `name` = '2' LIMIT 1
+      status_code: 200
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
 
 collect_addtool_02:
     host: ${{host()}}
-    url: /lg/collect/addtool/json
+    url: /iOS/v2.0/user/collectProduct/save
     method: POST
-    detail: 未登录状态下新增收藏网址
+    detail: 未登录状态下新增商品
     headers:
-      Content-Type: multipart/form-data;
+      Content-Type: application/json;
       # 这里cookie的值，写的是存入缓存的名称
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-
-      name: 自动生成收藏网址${{random_int()}}
-      link: https://gitee.com/yu_xiao_qi/pytest-auto-api2
+      productId: "1150930"
+      token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXRvbmd6ZXJvLmNvbSIsInVzZXJJZCI6IjI4OTY5NDkiLCJuaWNrTmFtZSI6IlpaWTk1MDc0NjIxIiwiYXZhdGFyVXJsIjoiaHR0cHM6Ly9zcmMuenV6dXlhLmNuL0ZxRURTTFBuaTNIZmJYQzdLWlZSVldfbUlfTVoiLCJtb2JpbGUiOiIxODI3MTQyMTIwMyIsImlhdCI6MTcyMTAxMTAzMSwiZXhwIjoxNzIxNjE1ODMxfQ.kaBCCTnDBOlT_aZsaymaIZSAqx0Bug2ESadRvOreKaU"
     # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
     # 依赖的数据
@@ -73,14 +61,14 @@ collect_addtool_02:
       # 断言接口状态码
       errorCode:
       # 断言接口状态码
-        jsonpath: $.errorCode
+        jsonpath: $.head.code
         type: ==
-        value: -1001
+        value: 1
         AssertType:
       errorMsg:
-        jsonpath: $.errorMsg
+        jsonpath: $.head.message
         type: ==
-        value: '请先登录！'
+        value: '请重新登录！'
         AssertType:
     sql:
 

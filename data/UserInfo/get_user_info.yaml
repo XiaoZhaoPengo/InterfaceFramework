@@ -6,13 +6,13 @@ case_common:
 
 get_user_info_01:
     host: ${{host()}}
-    url: /user/lg/userinfo/json
+    url: /v1.6/minialiapp/user/getUserInfo
     method: GET
     detail: 正常获取个人身份信息
     headers:
-      Content-Type: multipart/form-data;
-      # 这里cookie的值，写的是存入缓存的名称
-      cookie: $cache{login_cookie}
+      Content-Type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: data
     # 是否执行，空或者 true 都会执行
@@ -24,15 +24,15 @@ get_user_info_01:
     dependence_case_data:
     assert:
       # 断言接口状态码
-      errorCode:
-        jsonpath: $.errorCode
+      code:
+        jsonpath: $.head.code
         type: ==
         value: 0
         AssertType:
-      # 断言接口返回的username
-      username:
-        jsonpath: $.data.userInfo.username
+      status_code: 200
+      message:
+        jsonpath: $.head.message
         type: ==
-        value: '18800000001'
+        value: 'success'
         AssertType:
     sql:
