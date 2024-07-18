@@ -231,7 +231,7 @@ buy_product_dev_long_06:
   sql:
 buy_product_dev_long_07:
   host: ${{host()}}
-  url: /v2.0/zftOrder/sign?deliveryAddress=%E6%B9%96%E5%8C%97%E7%9C%81&deliveryId=758923&orderNumber=0718101728969599&userIdCard=420115200004219814
+  url: /v2.0/zftOrder/sign?
   method: GET
   detail: 获取签名地址
   headers:
@@ -328,14 +328,10 @@ buy_product_dev_long_09:
     data:
        orderNumber: $cache{dev_long_orderNo}
     # 是否有依赖业务，为空或者false则表示没有
-    dependence_case: True
+    dependence_case: False
         # 依赖的数据
     dependence_case_data:
-      - case_id: buy_product_dev_long_01
-        dependent_data:
-          - dependent_type: response
-            jsonpath: $.details.orderNo
-            set_cache: dev_long_orderNo
+
     assert:
       # 断言接口状态码
       code:
