@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2024-07-18 17:51:43
+# @Time   : 2024-07-18 23:19:55
 
 
 import allure
@@ -21,7 +21,7 @@ re_data = regular(str(TestData))
 @allure.feature("直播商品下单模块")
 class TestBuyProductLive:
 
-    @allure.story("直播商品下单接口")
+    @allure.story("直播测试商品下单接口")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
     def test_buy_product_live(self, in_data, case_skip):
         """

@@ -1,0 +1,384 @@
+# 公共参数
+case_common:
+  allureEpic: 开发平台接口
+  allureFeature: 测试商品下单模块
+  allureStory: 测试长短租商品下单接口
+
+buy_product_dev_long_01:
+  host: ${{host()}}
+  url: /v2.0/alimini/preAuthOrder/createPreOrder
+  method: POST
+  detail: 准备创建长租灵活租测试商品订单
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    productId: '1062'
+    isInsurance: '0'
+    activeCoupon: true
+    count: '1'
+    firstRegionId: 0
+    selfId: 0
+    skuId: 'TC22-RL02-YS73-ZQ03'
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_02:
+  host: ${{host()}}
+  url: /v1.6/minialiapp/getCouponsByProductId
+  method: GET
+  detail: 根据商品id获取优惠券
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    # response信息: "details":{"available":[],"notAvailable":[]},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_03:
+  host: ${{host()}}
+  url: /2.0/minialiapp/message/getOrderAuth
+  method: GET
+  detail: 获取订单授权
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    # response信息: details":{"authId":1359386,"userId":2896949,"authType":"user_order_center_auth","authService":"alipay","requestBody":null,"responseBody":"6382369f03e84d29a4082565d7ceJX77","createDate":1696668940000},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_04:
+  host: ${{host()}}
+  url: /v2.0/alimini/preAuthOrder/userCertInfo
+  method: GET
+  detail: 获取用户证书信息
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    # response信息: details":{"certName":"肖朝鹏","certNo":"420115200004219814"},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_05:
+  host: ${{host()}}
+  url: /v2.0/alimini/preAuthOrder/userCertifyUrl
+  method: POST
+  detail: 获取用户认证链接
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    certName: $cache{dev_long_certName}
+    certNo: $cache{dev_long_certNo}
+    orderNumber: $cache{dev_long_orderNo}
+    # response信息: "details":{"faceToken":"5a2e0f9ce452aa66054b5e3b3088afbd","authUrl":"https://t.esign.cn/0yWB7P8","expire":1721357979073,"originalUrl":"https://openapi.alipay.com/gateway.do?alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2018082261126127&biz_content=%7B%22certify_id%22%3A%225a2e0f9ce452aa66054b5e3b3088afbd%22%7D&charset=UTF-8&format=json&method=alipay.user.certify.open.certify&sign=hhdpNFPlTr9%2Bjhjgh7TwPScbBDDNmCprd1BHIWw2t4sA%2BMNPc7RzefY86%2B486mbSMnVXgdlJhafFyydTW6jSDY1WuCVXYDr3x5wVjNU52968SEG%2Fp2433H3S4RNj%2FEJmxj%2FRWXrqLVYxuzeuFsPQD19u8Bd%2BoMdHfE64FDA8lcH3I9mEcWPeAtcLzCgEWE9CF%2FXUNpF1fCtjXBBQPJzZpSX5glgpH0dGX0DjDJT32%2B4geNHf%2FcqkJ%2Fb0y%2FPK3U2EIVXFBuUc63aRa%2FqpT%2F7d2iawMi57%2FqvkB9blfC1wNe1peVqwIcaD%2FlfSqYNnn4KEU6xTjzZDzxf0OCW%2BFKIqgg%3D%3D&sign_type=RSA2&timestamp=2024-07-18+11%3A59%3A39&version=1.0","flowId":"3465152412909046302"},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: True
+  # 依赖的数据
+  dependence_case_data:
+    - case_id: buy_product_dev_long_01
+      dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.orderNo
+          set_cache: dev_long_orderNo
+    - case_id: buy_product_dev_long_04 # 获取用户证书姓名
+      dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.certName
+          set_cache: dev_long_certName
+    - case_id: buy_product_dev_long_04 # 获取用户证书id
+      dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.certNo
+          set_cache: dev_long_certNo
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_06:
+  host: ${{host()}}
+  url: /2.0/alimini/preAuthOrder/getUserCertifyInfo?flowId=3465152412909046302&orderNumber=0718101728969599
+  method: GET
+  detail: 完成用户认证
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    flowId: ${cache{dev_long_flowId}
+    orderNumber: $cache{dev_long_orderNo}
+    # response信息: "details":{"faceToken":"5a2e0f9ce452aa66054b5e3b3088afbd","authUrl":"https://t.esign.cn/0yWB7P8","expire":1721357979073,"originalUrl":"https://openapi.alipay.com/gateway.do?alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2018082261126127&biz_content=%7B%22certify_id%22%3A%225a2e0f9ce452aa66054b5e3b3088afbd%22%7D&charset=UTF-8&format=json&method=alipay.user.certify.open.certify&sign=hhdpNFPlTr9%2Bjhjgh7TwPScbBDDNmCprd1BHIWw2t4sA%2BMNPc7RzefY86%2B486mbSMnVXgdlJhafFyydTW6jSDY1WuCVXYDr3x5wVjNU52968SEG%2Fp2433H3S4RNj%2FEJmxj%2FRWXrqLVYxuzeuFsPQD19u8Bd%2BoMdHfE64FDA8lcH3I9mEcWPeAtcLzCgEWE9CF%2FXUNpF1fCtjXBBQPJzZpSX5glgpH0dGX0DjDJT32%2B4geNHf%2FcqkJ%2Fb0y%2FPK3U2EIVXFBuUc63aRa%2FqpT%2F7d2iawMi57%2FqvkB9blfC1wNe1peVqwIcaD%2FlfSqYNnn4KEU6xTjzZDzxf0OCW%2BFKIqgg%3D%3D&sign_type=RSA2&timestamp=2024-07-18+11%3A59%3A39&version=1.0","flowId":"3465152412909046302"},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: True
+  # 依赖的数据
+  dependence_case_data:
+    - case_id: buy_product_dev_long_05 # 从用例05获取flowId
+      dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.flowId
+          set_cache: dev_long_flowId
+
+
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+buy_product_dev_long_07:
+  host: ${{host()}}
+  url: /v2.0/zftOrder/sign?deliveryAddress=%E6%B9%96%E5%8C%97%E7%9C%81&deliveryId=758923&orderNumber=0718101728969599&userIdCard=420115200004219814
+  method: GET
+  detail: 获取签名地址
+  headers:
+    content-type: application/json
+    # 这里token的值，写的是存入缓存的名称
+    token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+  requestType: json
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  data:
+    deliveryAddress: '%E6%B9%96%E5%8C%97%E7%9C%81'
+    deliveryId: 758923
+    orderNumber: $cache{dev_long_orderNo}
+    userIdCard: 420115200004219814
+    # response信息: "details":{"faceToken":"5a2e0f9ce452aa66054b5e3b3088afbd","authUrl":"https://t.esign.cn/0yWB7P8","expire":1721357979073,"originalUrl":"https://openapi.alipay.com/gateway.do?alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2018082261126127&biz_content=%7B%22certify_id%22%3A%225a2e0f9ce452aa66054b5e3b3088afbd%22%7D&charset=UTF-8&format=json&method=alipay.user.certify.open.certify&sign=hhdpNFPlTr9%2Bjhjgh7TwPScbBDDNmCprd1BHIWw2t4sA%2BMNPc7RzefY86%2B486mbSMnVXgdlJhafFyydTW6jSDY1WuCVXYDr3x5wVjNU52968SEG%2Fp2433H3S4RNj%2FEJmxj%2FRWXrqLVYxuzeuFsPQD19u8Bd%2BoMdHfE64FDA8lcH3I9mEcWPeAtcLzCgEWE9CF%2FXUNpF1fCtjXBBQPJzZpSX5glgpH0dGX0DjDJT32%2B4geNHf%2FcqkJ%2Fb0y%2FPK3U2EIVXFBuUc63aRa%2FqpT%2F7d2iawMi57%2FqvkB9blfC1wNe1peVqwIcaD%2FlfSqYNnn4KEU6xTjzZDzxf0OCW%2BFKIqgg%3D%3D&sign_type=RSA2&timestamp=2024-07-18+11%3A59%3A39&version=1.0","flowId":"3465152412909046302"},"success":true}
+  # 是否有依赖业务，为空或者false则表示没有
+  dependence_case: False
+  # 依赖的数据
+  dependence_case_data:
+
+  assert:
+    # 断言接口状态码
+    code:
+      jsonpath: $.head.code
+      type: ==
+      value: 0
+      AssertType:
+    message:
+      jsonpath: $.head.message
+      type: ==
+      value: 'success'
+      AssertType:
+  sql:
+
+
+buy_product_dev_long_08:
+    host: ${{host()}}
+    url: /v2.3/alimini/preAuthOrder/createOrder
+    method: POST
+    detail: 创建长租测试商品订单
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      orderNo: $cache{dev_long_orderNo}
+      remark: ''
+      email: 1340128837@qq.com
+      model: 'iPhone16,2'
+      sourceId: MjA4ODkxMjI0MjY4MTc3M3wyMDIxMDAxMTk5NjQ1MTUwfDE3MjEzMDc3NTcxNDd8ZmFsc2V8VE9LRU5fSVNfTlVMTA==
+      deliveryId: 758923
+      firstRegionId: 0
+      selfId: 0
+  # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: True
+        # 依赖的数据
+    dependence_case_data:
+      - case_id: buy_product_dev_long_06
+        dependent_data:
+          - dependent_type: response
+            jsonpath: $.details.status
+            set_cache: dev_long_status
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_dev_long_09:
+    host: ${{host()}}
+    url: /v2.0/alimini/preAuthOrder/preAuthSign
+    method: POST
+    detail: 认证前标志
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+       orderNumber: $cache{dev_long_orderNo}
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: True
+        # 依赖的数据
+    dependence_case_data:
+      - case_id: buy_product_dev_long_01
+        dependent_data:
+          - dependent_type: response
+            jsonpath: $.details.orderNo
+            set_cache: dev_long_orderNo
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_live_10:
+    host: ${{host()}}
+    url: /minialiapp/riskCommit
+    method: POST
+    detail: 风险承诺
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      orderNumber: $cache{dev_long_orderNo}
+      rank: "rank1"
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+        # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:

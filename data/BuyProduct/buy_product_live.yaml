@@ -2,7 +2,7 @@
 case_common:
   allureEpic: 开发平台接口
   allureFeature: 直播商品下单模块
-  allureStory: 直播商品下单接口
+  allureStory: 直播测试商品下单接口
 
 buy_product_live_01:
     host: ${{host()}}

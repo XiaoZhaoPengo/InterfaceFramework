@@ -1,8 +1,8 @@
 # 公共参数
 case_common:
   allureEpic: 开发平台接口
-  allureFeature: 商品下单模块
-  allureStory: 商品下单接口
+  allureFeature: 正式商品下单模块
+  allureStory: 正式普通商品下单接口
 
 buy_product_01:
     host: ${{host()}}
