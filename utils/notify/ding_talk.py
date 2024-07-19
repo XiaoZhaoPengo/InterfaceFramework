@@ -129,8 +129,11 @@ class DingTalkSendMsg:
         if self.metrics.failed + self.metrics.broken > 0:
             is_at_all = True
         text = f"#### {config.project_name}自动化通知  " \
+               f" ![screenshot](" \
+               f"http://dev.admin.zuzuya.cn/static/img/zuzuyalogo.11da65e.png" \
+               f")" \
                f"\n\n>Python脚本任务: {config.project_name}" \
-               f"\n\n>环境: TEST\n\n>" \
+               f"\n\n>环境: Dev\n\n>" \
                f"执行人: {config.tester_name}" \
                f"\n\n>执行结果: {self.metrics.pass_rate}% " \
                f"\n\n>总用例数: {self.metrics.total} " \
@@ -138,10 +141,7 @@ class DingTalkSendMsg:
                f" \n\n>失败用例数: {self.metrics.failed} " \
                f" \n\n>异常用例数: {self.metrics.broken} " \
                f"\n\n>跳过用例数: {self.metrics.skipped}" \
-               f" ![screenshot](" \
-               f"http://dev.admin.zuzuya.cn/static/img/zuzuyalogo.11da65e.png" \
-               f")" \
-               f")\n" \
+               f"\n" \
                f" > ###### 测试报告 [详情](http://{get_host_ip()}:9999/index.html) \n"
         DingTalkSendMsg(AllureFileClean().get_case_count()).send_markdown(
             title="【接口自动化通知】",
