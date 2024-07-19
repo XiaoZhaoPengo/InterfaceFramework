@@ -25,8 +25,8 @@ excel_report: False
 
 # 钉钉相关配置
 ding_talk:
-  webhook: https://oapi.dingtalk.com/robot/send?access_token=683f772ae36b46196b750eb037270e38a115f9b9adde3a7f80e50d7e340d0a01
-  secret: SECc5750b06a568f8f651a4386899f267c1d3e0bfafad8b9a8ff62e059bb8fa9c57
+  webhook: https://oapi.dingtalk.com/robot/send?access_token=0576735857b406448ffb3feba889a5c619321614985b8d77a8d7428a3f30e9fd
+  secret: SECd5dd9e8775867d72e12b6c01bf03922e889d7529543cdc31abcfd59cb4792e55
 #  webhook:
 #  secret:
 # 数据库相关配置
