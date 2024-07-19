@@ -58,9 +58,14 @@ buy_product_dev_long_02:
   data:
     # response信息: "details":{"available":[],"notAvailable":[]},"success":true}
   # 是否有依赖业务，为空或者false则表示没有
-  dependence_case: False
+  dependence_case: True
   # 依赖的数据
   dependence_case_data:
+    - case_id: buy_product_dev_long_01
+      dependent_data:
+        - dependent_type: response
+          jsonpath: $.details.orderNo
+          set_cache: dev_long_orderNo_02
   assert:
     # 断言接口状态码
     code:
@@ -345,11 +350,11 @@ buy_product_dev_long_09:
         value: 'success'
         AssertType:
     sql:
-buy_product_live_10:
+buy_product_dev_long_10:
     host: ${{host()}}
-    url: /minialiapp/riskCommit
+    url: /v2.0/alimini/preAuthOrder/cancel
     method: POST
-    detail: 风险承诺
+    detail: 取消订单
     headers:
       content-type: application/json
       # 这里token的值，写的是存入缓存的名称
@@ -359,8 +364,8 @@ buy_product_live_10:
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      orderNumber: $cache{dev_long_orderNo}
-      rank: "rank1"
+       orderNumber: $cache{dev_long_orderNo}
+       reason: "体验下单流程"
     # 是否有依赖业务，为空或者false则表示没有
     dependence_case: False
         # 依赖的数据

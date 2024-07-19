@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2024-07-18 23:34:54
+# @Time   : 2024-07-19 10:23:36
 
 
 import allure
@@ -12,7 +12,7 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['buy_product_live_01', 'buy_product_live_02', 'buy_product_live_03', 'buy_product_live_04', 'buy_product_live_05']
+case_id = ['buy_product_live_01', 'buy_product_live_02', 'buy_product_live_03', 'buy_product_live_04', 'buy_product_live_05', 'buy_product_live_06']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 

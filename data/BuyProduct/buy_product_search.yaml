@@ -1,0 +1,108 @@
+# 公共参数
+case_common:
+  allureEpic: 开发平台接口
+  allureFeature: 搜索商品模块
+  allureStory: 搜索商品接口
+
+buy_product_01:
+    host: ${{host()}}
+    url: /alipay/riskDistinguish?text=%E6%B5%8B%E8%AF%95&type=0
+    method: GET
+    detail: 搜索测试商品
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      text: '%E6%B5%8B%E8%AF%95'
+      type: 0
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+        # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      status_code: 200
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_02:
+    host: ${{host()}}
+    url: /alipay/riskDistinguish?text=%E8%8B%B9%E6%9E%9C&type=0
+    method: GET
+    detail: 搜索正常长租商品 "苹果"
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+  # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      text: '%E8%8B%B9%E6%9E%9C'
+      type: 0
+  # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+  # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      status_code: 200
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:
+buy_product_03:
+    host: ${{host()}}
+    url: /alipay/riskDistinguish?text=Switch&type=0
+    method: GET
+    detail: 搜索正常短租商品 "Switch"
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+  # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+  # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      text: Switch
+      type: 0
+  # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+  # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      status_code: 200
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:

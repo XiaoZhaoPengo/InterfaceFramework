@@ -33,13 +33,13 @@ def work_login_init():
     
     url = "https://dev.api.zuzuya.cn/minialiapp/user/phoneAuth"
     data = {
-        "auth_code": '51d23495b9674fb4b8d2674d940cZC77',
+        "auth_code": '758f48f1430d4b7bbefd799c9c81NE77',
         "phoneData": "{\"response\":\"lHMEErMZCAjMYopf4Fl0RdSUmwvUQfIkf1lDslVJ9U9Bw9+GhlNPtShcFC6SkiWBpJE1rDnDeVjUAuaya5rpJg==\",\"sign\":\"RFISYSozx5AsTSpwcWdt/JtBhO2+3gtI+MNljC9+fyBDCOxMA5me13M372YY0uA6uUYufrBGUicFepxzb49ArUN511HbOSRw6NqYV23wxzDTJtT2/9uvgJn4HRu4R1YjVaU7jqVQ+m081g8XSW1tS4Ey8Ns0lY8Xwy35Rso7/lE7UuLULrbSsFYQBrojPGTwo09R7UiQTfVMxhEMZTrI5XtxNgir6dkVBZ+M+tnenqRf+OzpTbigfYTCs0x70YcKelIz7EYtBLK/fwGVVPd3Ub/d5UCJYG5raAutTr9E0Uw2VLRC41ChIGoSW7SZDxgcz2S3urPbFLqgWmPhAwDE3w==\"}",
         "clientType": 'alipayMiniapp'
     }
     
     headers = {'Content-Type': 'application/json', "from": '', 'appId': '2021001199645150',
-               'fromAuthCode': 'e6ac010acda44bf2a35ed97d4d65NX77'}
+               'fromAuthCode': '70c70cd5184640128746f27b771fWD77'}
     # 请求登录接口
     data = json.dumps(data)
     res = requests.post(url=url, data=data, verify=True, headers=headers)
