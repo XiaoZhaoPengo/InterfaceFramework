@@ -139,7 +139,8 @@ class DingTalkSendMsg:
                f" \n\n>异常用例数: {self.metrics.broken} " \
                f"\n\n>跳过用例数: {self.metrics.skipped}" \
                f" ![screenshot](" \
-               f"https://img.alicdn.com/tfs/TB1NwmBEL9TBuNjy1zbXXXpepXa-2400-1218.png" \
+               f"http://dev.admin.zuzuya.cn/static/img/zuzuyalogo.11da65e.png" \
+               f")" \
                f")\n" \
                f" > ###### 测试报告 [详情](http://{get_host_ip()}:9999/index.html) \n"
         DingTalkSendMsg(AllureFileClean().get_case_count()).send_markdown(
