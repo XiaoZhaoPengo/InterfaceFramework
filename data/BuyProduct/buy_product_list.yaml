@@ -1,0 +1,42 @@
+# 公共参数
+case_common:
+  allureEpic: 开发平台接口
+  allureFeature: 测试我的订单模块
+  allureStory: 测试全部订单接口
+
+buy_product_list_01:
+    host: ${{host()}}
+    url: /iOS/v2.0/orderInfo/list
+    method: POST
+    detail: 获取我的订单-全部订单
+    headers:
+      content-type: application/json
+      # 这里token的值，写的是存入缓存的名称
+      token: $cache{login_token}
+    # 请求的数据，是 params 还是 json、或者file、data
+    requestType: json
+    # 是否执行，空或者 true 都会执行
+    is_run:
+    data:
+      clientType: "alipayMiniapp"
+      order_state: 1
+      size: 10
+      start: -1
+      token: $cache{login_token}
+    # 是否有依赖业务，为空或者false则表示没有
+    dependence_case: False
+        # 依赖的数据
+    dependence_case_data:
+    assert:
+      # 断言接口状态码
+      code:
+        jsonpath: $.head.code
+        type: ==
+        value: 0
+        AssertType:
+      message:
+        jsonpath: $.head.message
+        type: ==
+        value: 'success'
+        AssertType:
+    sql:

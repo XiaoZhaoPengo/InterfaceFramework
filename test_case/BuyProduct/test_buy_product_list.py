@@ -12,18 +12,18 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['buy_product_live_01', 'buy_product_live_02', 'buy_product_live_03', 'buy_product_live_04', 'buy_product_live_05', 'buy_product_live_06']
+case_id = ['buy_product_list_01']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 
 
 @allure.epic("开发平台接口")
-@allure.feature("直播商品下单模块")
-class TestBuyProductLive:
+@allure.feature("测试我的订单模块")
+class TestBuyProductList:
 
-    @allure.story("直播测试商品下单接口")
+    @allure.story("测试全部订单接口")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
-    def test_buy_product_live(self, in_data, case_skip):
+    def test_buy_product_list(self, in_data, case_skip):
         """
         :param :
         :return:
@@ -38,4 +38,4 @@ class TestBuyProductLive:
 
 
 if __name__ == '__main__':
-    pytest.main(['test_test_buy_product_live.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])
+    pytest.main(['test_test_buy_product_list.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])
