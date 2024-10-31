@@ -5,7 +5,7 @@ case_common:
   allureStory: 直播测试商品下单接口
 
 buy_product_live_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /v2.1/products/detail/1150928?exclusivePrice=
     method: get
     detail: 获取直播测试商品订单 (商品目前是隐藏状态 先跳过)

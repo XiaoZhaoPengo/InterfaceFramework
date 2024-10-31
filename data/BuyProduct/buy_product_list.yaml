@@ -5,7 +5,7 @@ case_common:
   allureStory: 测试全部订单接口
 
 buy_product_list_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /iOS/v2.0/orderInfo/list
     method: POST
     detail: 获取我的订单-全部订单

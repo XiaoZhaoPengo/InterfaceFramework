@@ -5,9 +5,9 @@ env: 测试环境
 tester_name: 肖朝鹏
 
 # 域名1
-host: https://dev.api.zuzuya.cn
+host: http://dev.adminapi.zuzuya.cn
 # 域名2，支持多个域名配置
-app_host:
+app_host: https://dev.api.zuzuya.cn
 
 # 实时更新用例内容，False时，已生成的代码不会在做变更
 # 设置为True的时候，修改yaml文件的用例，代码中的内容会实时更新

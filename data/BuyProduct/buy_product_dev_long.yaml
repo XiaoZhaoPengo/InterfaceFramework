@@ -5,7 +5,7 @@ case_common:
   allureStory: 测试长租商品下单接口
 
 buy_product_dev_long_01:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /v2.0/alimini/preAuthOrder/createPreOrder
   method: POST
   detail: 准备创建长租灵活租测试商品订单
@@ -43,7 +43,7 @@ buy_product_dev_long_01:
       AssertType:
   sql:
 buy_product_dev_long_02:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /v1.6/minialiapp/getCouponsByProductId
   method: GET
   detail: 根据商品id获取优惠券
@@ -80,7 +80,7 @@ buy_product_dev_long_02:
       AssertType:
   sql:
 buy_product_dev_long_03:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /2.0/minialiapp/message/getOrderAuth
   method: GET
   detail: 获取订单授权
@@ -112,7 +112,7 @@ buy_product_dev_long_03:
       AssertType:
   sql:
 buy_product_dev_long_04:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /v2.0/alimini/preAuthOrder/userCertInfo
   method: GET
   detail: 获取用户证书信息
@@ -144,7 +144,7 @@ buy_product_dev_long_04:
       AssertType:
   sql:
 buy_product_dev_long_05:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /v2.0/alimini/preAuthOrder/userCertifyUrl
   method: POST
   detail: 获取用户认证链接
@@ -194,7 +194,7 @@ buy_product_dev_long_05:
       AssertType:
   sql:
 buy_product_dev_long_06:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /2.0/alimini/preAuthOrder/getUserCertifyInfo?flowId=3465152412909046302&orderNumber=0718101728969599
   method: GET
   detail: 完成用户认证
@@ -235,7 +235,7 @@ buy_product_dev_long_06:
       AssertType:
   sql:
 buy_product_dev_long_07:
-  host: ${{host()}}
+  host: ${{app_host()}}
   url: /v2.0/zftOrder/sign?
   method: GET
   detail: 获取签名地址
@@ -274,7 +274,7 @@ buy_product_dev_long_07:
 
 
 buy_product_dev_long_08:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /v2.3/alimini/preAuthOrder/createOrder
     method: POST
     detail: 创建长租测试商品订单
@@ -318,7 +318,7 @@ buy_product_dev_long_08:
         AssertType:
     sql:
 buy_product_dev_long_09:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /v2.0/alimini/preAuthOrder/preAuthSign
     method: POST
     detail: 认证前标志
@@ -351,7 +351,7 @@ buy_product_dev_long_09:
         AssertType:
     sql:
 buy_product_dev_long_10:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /v2.0/alimini/preAuthOrder/cancel
     method: POST
     detail: 取消订单

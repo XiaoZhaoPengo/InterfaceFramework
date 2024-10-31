@@ -12,18 +12,18 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['collect_tool_list_01']
+case_id = ['admin_login_01', 'admin_login_02']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 
 
 @allure.epic("开发平台接口")
-@allure.feature("收藏模块")
-class TestCollectToolList:
+@allure.feature("租租鸭后台登录模块")
+class TestAdminLogin:
 
-    @allure.story("收藏商品列表接口")
+    @allure.story("登录")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
-    def test_collect_tool_list(self, in_data, case_skip):
+    def test_admin_login(self, in_data, case_skip):
         """
         :param :
         :return:
@@ -38,4 +38,4 @@ class TestCollectToolList:
 
 
 if __name__ == '__main__':
-    pytest.main(['test_test_collect_tool_list.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])
+    pytest.main(['test_test_admin_login.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])

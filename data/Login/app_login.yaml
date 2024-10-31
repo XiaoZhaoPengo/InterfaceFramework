@@ -1,11 +1,11 @@
 # 公共参数
 case_common:
   allureEpic: 开发平台接口
-  allureFeature: 登录模块
+  allureFeature: 租租鸭app登录模块
   allureStory: 登录
 
-login_01:
-    host: ${{host()}}
+app_login_01:
+    host: ${{app_host()}}
     url: /minialiapp/user/phoneAuth
     method: POST
     detail: 正常登录
@@ -13,13 +13,13 @@ login_01:
       appId: '2021001199645150'
       content-type: application/json
       from: ''
-      fromAuthCode: '221b6d1286834f42a88dddb8ce8cPX77'
+      fromAuthCode: 'f44fe26217a64a88bedc81f47800OX77'
     # 请求的数据，是 params 还是 json、或者file、data
     requestType: json
     # 是否执行，空或者 true 都会执行
     is_run:
     data:
-      "auth_code": '20d9a36546db486f8524f2113d14YA77'
+      "auth_code": '5f3d823afbc54ee9af8041381600UX77'
       "phoneData": "{\"response\":\"lHMEErMZCAjMYopf4Fl0RdSUmwvUQfIkf1lDslVJ9U9Bw9+GhlNPtShcFC6SkiWBpJE1rDnDeVjUAuaya5rpJg==\",\"sign\":\"RFISYSozx5AsTSpwcWdt/JtBhO2+3gtI+MNljC9+fyBDCOxMA5me13M372YY0uA6uUYufrBGUicFepxzb49ArUN511HbOSRw6NqYV23wxzDTJtT2/9uvgJn4HRu4R1YjVaU7jqVQ+m081g8XSW1tS4Ey8Ns0lY8Xwy35Rso7/lE7UuLULrbSsFYQBrojPGTwo09R7UiQTfVMxhEMZTrI5XtxNgir6dkVBZ+M+tnenqRf+OzpTbigfYTCs0x70YcKelIz7EYtBLK/fwGVVPd3Ub/d5UCJYG5raAutTr9E0Uw2VLRC41ChIGoSW7SZDxgcz2S3urPbFLqgWmPhAwDE3w==\"}"
       "clientType": "alipayMiniapp"
       # 是否有依赖业务，为空或者false则表示没有
@@ -41,8 +41,8 @@ login_01:
         AssertType:
     sql:
 
-login_02:
-    host: ${{host()}}
+app_login_02:
+    host: ${{app_host()}}
     url: /minialiapp/user/phoneAuth
     method: POST
     detail: 不带参数错误登录

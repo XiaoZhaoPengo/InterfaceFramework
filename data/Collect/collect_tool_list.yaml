@@ -5,7 +5,7 @@ case_common:
   allureStory: 收藏商品列表接口
 
 collect_tool_list_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /iOS/v2.0/user/collectProducts/select
     method: POST
     detail: 查看收藏商品列表接口

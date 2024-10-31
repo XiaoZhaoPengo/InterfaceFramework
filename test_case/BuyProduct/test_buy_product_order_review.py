@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time   : 2024-07-23 14:18:52
+# @Time   : 2024-07-29 11:39:40
 
 
 import allure
@@ -12,18 +12,18 @@ from utils.read_files_tools.regular_control import regular
 from utils.requests_tool.teardown_control import TearDownHandler
 
 
-case_id = ['login_01', 'login_02']
+case_id = ['buy_product_order_review_01', 'buy_product_order_review_02', 'buy_product_order_review_03', 'buy_product_order_review_04', 'buy_product_order_review_05', 'buy_product_order_review_06', 'buy_product_order_review_07', 'buy_product_order_review_08', 'buy_product_order_review_09', 'buy_product_order_review_10', 'buy_product_order_review_11', 'buy_product_order_review_12', 'buy_product_order_review_13']
 TestData = GetTestCase.case_data(case_id)
 re_data = regular(str(TestData))
 
 
 @allure.epic("开发平台接口")
-@allure.feature("登录模块")
-class TestLogin:
+@allure.feature("商品订单审核模块")
+class TestBuyProductOrderReview:
 
-    @allure.story("登录")
+    @allure.story("测试长租商品下单接口")
     @pytest.mark.parametrize('in_data', eval(re_data), ids=[i['detail'] for i in TestData])
-    def test_login(self, in_data, case_skip):
+    def test_buy_product_order_review(self, in_data, case_skip):
         """
         :param :
         :return:
@@ -38,4 +38,4 @@ class TestLogin:
 
 
 if __name__ == '__main__':
-    pytest.main(['test_test_login.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])
+    pytest.main(['test_test_buy_product_order_review.py', '-s', '-W', 'ignore:Module already imported:pytest.PytestWarning'])

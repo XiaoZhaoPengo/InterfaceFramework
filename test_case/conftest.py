@@ -24,22 +24,75 @@ def clear_report():
     del_file(ensure_path_sep("\\report"))
 
 
+def send_verification_code():
+    """
+        发送验证码请求
+        :return:
+    """
+    url = "http://dev.adminapi.zuzuya.cn/v1.0/admin/getSmsCode?phone=18271421203"
+    headers = {'Content-Type': 'application/json'}
+    # 请求验证码接口
+    res = requests.get(url=url, headers=headers, verify=True)
+    response_res = res.json()
+    print(response_res)
+    return response_res
+
+
+@pytest.fixture(scope="session", autouse=True)
+def admin_login_init():
+    """
+    获取后台登录的cookie
+    :return:
+    """
+    # 先发送验证码请求
+    verification_response = send_verification_code()
+    
+    # 等待一段时间，确保验证码已被发送和处理
+    time.sleep(1.5)  # 假设需要等待5秒，根据实际情况调整
+    
+    url = "http://dev.adminapi.zuzuya.cn/v1.0/admin/smsLogin"
+    data = {
+        "code": "1234",
+        "device": "pc",
+        "userName": "18271421203"
+    }
+    headers = {'Content-Type': 'application/json'}
+    # 请求登录接口
+    data = json.dumps(data)
+    
+    res = requests.post(url=url, data=data, verify=True, headers=headers)
+    response_cookie = res.cookies
+    
+    response_token = res.json()
+    print(response_token)
+    cookies = ''
+    for k, v in response_cookie.items():
+        _cookie = k + "=" + v + ";"
+        # 拿到登录的cookie内容，cookie拿到的是字典类型，转换成对应的格式
+        cookies += _cookie
+        # 将登录接口中的cookie写入缓存中，其中login_cookie是缓存名称
+    # CacheHandler.update_cache(cache_name='login_cookie', value=cookies)
+    # 将登录接口中的token写入缓存中，其中login_token是缓存名称
+    token = response_token['details']['token']
+    print(token)
+    CacheHandler.update_cache(cache_name='admin_token', value=token)
+
 @pytest.fixture(scope="session", autouse=True)
 def work_login_init():
     """
-    获取登录的cookie
+    获取app登录的cookie
     :return:
     """
     
     url = "https://dev.api.zuzuya.cn/minialiapp/user/phoneAuth"
     data = {
-        "auth_code": 'ffacb0986676429b88a8dc8ac6d2PX77',
+        "auth_code": '818887e9020b4c8a850cb37f4701TC77',
         "phoneData": "{\"response\":\"lHMEErMZCAjMYopf4Fl0RdSUmwvUQfIkf1lDslVJ9U9Bw9+GhlNPtShcFC6SkiWBpJE1rDnDeVjUAuaya5rpJg==\",\"sign\":\"RFISYSozx5AsTSpwcWdt/JtBhO2+3gtI+MNljC9+fyBDCOxMA5me13M372YY0uA6uUYufrBGUicFepxzb49ArUN511HbOSRw6NqYV23wxzDTJtT2/9uvgJn4HRu4R1YjVaU7jqVQ+m081g8XSW1tS4Ey8Ns0lY8Xwy35Rso7/lE7UuLULrbSsFYQBrojPGTwo09R7UiQTfVMxhEMZTrI5XtxNgir6dkVBZ+M+tnenqRf+OzpTbigfYTCs0x70YcKelIz7EYtBLK/fwGVVPd3Ub/d5UCJYG5raAutTr9E0Uw2VLRC41ChIGoSW7SZDxgcz2S3urPbFLqgWmPhAwDE3w==\"}",
         "clientType": 'alipayMiniapp'
     }
     
     headers = {'Content-Type': 'application/json', "from": '', 'appId': '2021001199645150',
-               'fromAuthCode': '8ed152a35ac4401fbca3395eddd5SX77'}
+               'fromAuthCode': '397f11cffed949048762fccfa3d4PA77'}
     # 请求登录接口
     data = json.dumps(data)
     res = requests.post(url=url, data=data, verify=True, headers=headers)
@@ -139,4 +192,4 @@ def pytest_terminal_summary(terminalreporter):
         INFO.logger.info("用例成功率: 0.00 %")
 
 if __name__ == '__main__':
-    work_login_init()
+    admin_login_init()

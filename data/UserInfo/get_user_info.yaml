@@ -5,7 +5,7 @@ case_common:
   allureStory: 个人信息接口
 
 get_user_info_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /v1.6/minialiapp/user/getUserInfo
     method: GET
     detail: 正常获取个人身份信息

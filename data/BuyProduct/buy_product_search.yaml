@@ -5,7 +5,7 @@ case_common:
   allureStory: 搜索商品接口
 
 buy_product_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /alipay/riskDistinguish?text=%E6%B5%8B%E8%AF%95&type=0
     method: GET
     detail: 搜索测试商品
@@ -39,7 +39,7 @@ buy_product_01:
         AssertType:
     sql:
 buy_product_02:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /alipay/riskDistinguish?text=%E8%8B%B9%E6%9E%9C&type=0
     method: GET
     detail: 搜索正常长租商品 "苹果"
@@ -73,7 +73,7 @@ buy_product_02:
         AssertType:
     sql:
 buy_product_03:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /alipay/riskDistinguish?text=Switch&type=0
     method: GET
     detail: 搜索正常短租商品 "Switch"
@@ -106,3 +106,4 @@ buy_product_03:
         value: 'success'
         AssertType:
     sql:
+

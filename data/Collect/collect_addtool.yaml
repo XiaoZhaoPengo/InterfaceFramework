@@ -5,7 +5,7 @@ case_common:
   allureStory: 收藏商品接口
 
 collect_addtool_01:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /iOS/v2.0/user/collectProduct/save
     method: POST
     detail: 新增收藏商品接口
@@ -38,7 +38,7 @@ collect_addtool_01:
         AssertType:
 
 collect_addtool_02:
-    host: ${{host()}}
+    host: ${{app_host()}}
     url: /iOS/v2.0/user/collectProduct/save
     method: POST
     detail: 未登录状态下新增商品
