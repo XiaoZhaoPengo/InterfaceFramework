@@ -1,5 +1,5 @@
 
-## 框架介绍
+## 接口自动化框架介绍
 
 本框架主要是基于 Python + pytest + allure + log + yaml + mysql + redis + 钉钉通知 + Jenkins 实现的接口自动化框架。
 
